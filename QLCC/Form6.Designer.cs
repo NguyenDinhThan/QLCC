@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnback = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnthem = new System.Windows.Forms.Button();
@@ -37,18 +39,34 @@
             this.txtname = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtid = new System.Windows.Forms.TextBox();
+            this.btnload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2});
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataGridView1.Location = new System.Drawing.Point(0, 300);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(800, 150);
             this.dataGridView1.TabIndex = 60;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "iDepartmentID";
+            this.Column1.HeaderText = "ID phòng ban";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "sDepartmentName";
+            this.Column2.HeaderText = "Tên phòng ban";
+            this.Column2.Name = "Column2";
             // 
             // btnback
             // 
@@ -124,11 +142,22 @@
             this.txtid.Size = new System.Drawing.Size(108, 20);
             this.txtid.TabIndex = 66;
             // 
+            // btnload
+            // 
+            this.btnload.Location = new System.Drawing.Point(606, 145);
+            this.btnload.Name = "btnload";
+            this.btnload.Size = new System.Drawing.Size(75, 23);
+            this.btnload.TabIndex = 67;
+            this.btnload.Text = "Load";
+            this.btnload.UseVisualStyleBackColor = true;
+            this.btnload.Click += new System.EventHandler(this.btnload_Click);
+            // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnload);
             this.Controls.Add(this.txtid);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtname);
@@ -157,5 +186,8 @@
         private System.Windows.Forms.TextBox txtname;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Button btnload;
     }
 }

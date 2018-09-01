@@ -72,5 +72,7 @@ namespace QLCC
             Form9 fm9 = new Form9();
             fm9.Show();
         }
+
+
     }
 }

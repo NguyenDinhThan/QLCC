@@ -83,6 +83,16 @@ namespace QLCC.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap don_hang_nam_san_xuat_camera_tai_dai_loan_chi_phi_thap1 {
+            get {
+                object obj = ResourceManager.GetObject("don-hang-nam-san-xuat-camera-tai-dai-loan-chi-phi-thap1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap images {
             get {
                 object obj = ResourceManager.GetObject("images", resourceCulture);

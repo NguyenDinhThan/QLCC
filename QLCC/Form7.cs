@@ -146,5 +146,10 @@ namespace QLCC
             txtid.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
             txtname.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
         }
+
+        private void btnload_Click(object sender, EventArgs e)
+        {
+            display();
+        }
     }
 }

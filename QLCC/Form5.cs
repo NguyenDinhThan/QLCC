@@ -15,12 +15,21 @@ namespace QLCC
     public partial class Form5 : Form
     {
         MySqlConnection con = new MySqlConnection(@"Data Source=localhost;port=3306;Initial Catalog=qlcc;User Id= root;password='';charset=utf8;sslmode=none;");
+
         public Form5()
         {
             InitializeComponent();
         }
 
-
+        private byte[] convertImageToBytes()
+        {
+            FileStream fs;
+            fs = new FileStream(txtanh.Text, FileMode.Open, FileAccess.Read);
+            byte[] pic = new byte[fs.Length];
+            fs.Read(pic, 0, System.Convert.ToInt32(fs.Length));
+            fs.Close();
+            return pic;
+        }
 
         private void display()
         {
@@ -39,8 +48,6 @@ namespace QLCC
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "chọn hình (*.jpg;*.jpeg;*.png) | *.jpg;*.jpeg;*.png";
-            ofd.FilterIndex = 1;
-            ofd.RestoreDirectory = true;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 pb.Image = Image.FromFile(ofd.FileName);
@@ -63,7 +70,7 @@ namespace QLCC
                 pms[4] = new MySqlParameter("lnn", MySqlDbType.VarChar);
                 pms[4].Value = txtten.Text;
                 pms[5] = new MySqlParameter("ep", MySqlDbType.Blob);
-                pms[5].Value = convertImageToBytes(); ;
+                pms[5].Value = convertImageToBytes();
                 pms[6] = new MySqlParameter("s", MySqlDbType.VarChar);
                 pms[6].Value = txtgt.Text;
                 pms[7] = new MySqlParameter("ic", MySqlDbType.VarChar);
@@ -85,6 +92,8 @@ namespace QLCC
                     cbbdid.Text = "";
                     txtten.Text = "";
                     txtho.Text = "";
+                    txtanh.Text = "";
+                    pb.Image.Dispose();
                     txtdiachi.Text = "";
                     txtsdt.Text = "";
                     txtcmnd.Text = "";
@@ -131,7 +140,6 @@ namespace QLCC
                     txtten.Text = "";
                     txtho.Text = "";
                     txtanh.Text = "";
-                    pb.Refresh();
                     txtdiachi.Text = "";
                     txtsdt.Text = "";
                     txtcmnd.Text = "";
@@ -281,48 +289,38 @@ namespace QLCC
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            try
+            {
+                txteid.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+                cbbpid.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                cbbdid.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                txtho.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                txtten.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+                MemoryStream ms = new MemoryStream((byte[])dataGridView1.CurrentRow.Cells[5].Value);
+                pb.Image = Image.FromStream(ms);
+                txtgt.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+                txtcmnd.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+                txtsdt.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString();
+                txtdiachi.Text = dataGridView1.CurrentRow.Cells[9].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
 
-            txteid.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            cbbpid.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-            cbbdid.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-            txtho.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-            txtten.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
-            ImageConverter objImageConverter = new ImageConverter();
-            pb.Image = (Image)objImageConverter.ConvertFrom(txtanh.Text);
-            pb.SizeMode = PictureBoxSizeMode.StretchImage;
-            txtgt.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
-            txtcmnd.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
-            txtsdt.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString();
-            txtdiachi.Text = dataGridView1.CurrentRow.Cells[9].Value.ToString();
+
         }
-        private byte[] convertImageToBytes()
+
+
+
+        public Image BytesToImage(byte[] imageBytes)
         {
-            FileStream fs;
-            fs = new FileStream(txtanh.Text, FileMode.Open, FileAccess.Read);
-            byte[] pic = new byte[fs.Length];
-            fs.Read(pic, 0, System.Convert.ToInt32(fs.Length));
-            fs.Close();
-            return pic;
+            MemoryStream ms = new MemoryStream();
+            ms.Write(imageBytes, 0, imageBytes.Length);
+            Image image = Image.FromStream(ms, true);
+            return image;
         }
-        //private Image byteArrayToImage(byte[] byteArrayIn)
-        //{
-        //    using (MemoryStream mStream = new MemoryStream(byteArrayIn))
-        //    {
-        //        return Image.FromStream(mStream);
-        //    }
-        //}
-        //private byte[] imgToByteArray(Image img)
-        //{
-        //    using (MemoryStream mStream = new MemoryStream())
-        //    {
-        //        img.Save(mStream, img.RawFormat);
-        //        return mStream.ToArray();
-        //    }
-        //}
-        //public static byte[] imgToByteConverter(Image inImg)
-        //{
-        //    ImageConverter imgCon = new ImageConverter();
-        //    return (byte[])imgCon.ConvertTo(inImg, typeof(byte[]));
-        //}
+    
     }
 }

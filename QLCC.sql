@@ -124,6 +124,17 @@ CREATE PROCEDURE up_pass (in pass1 varchar(50), in pass2 varchar(50), in pass3 v
 BEGIN
 UPDATE login SET password = pass3 where password = pass2 and pass2=pass3;
 END
+--cham cong
+CREATE PROCEDURE add_time (in id int(11), in sl int(11))
+BEGIN
+INSERT INTO chamcong(iEmployeeID,iDayWork) VALUES ( id,(select count(*)from time_sheet where time_sheet.iEmployeeID = id)) ;
+END 
+
+CREATE PROCEDURE update_time (in id int(11),)
+BEGIN
+UPDATE chamcong SET iDayWork = (select count(*)from time_sheet,chamcong where time_sheet.EmployeeID = id ) ;
+END 
+
 
 
 

@@ -37,6 +37,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnback = new System.Windows.Forms.Button();
             this.txtid = new System.Windows.Forms.TextBox();
+            this.btnload = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,11 +123,22 @@
             this.txtid.Size = new System.Drawing.Size(113, 20);
             this.txtid.TabIndex = 74;
             // 
+            // btnload
+            // 
+            this.btnload.Location = new System.Drawing.Point(602, 145);
+            this.btnload.Name = "btnload";
+            this.btnload.Size = new System.Drawing.Size(75, 23);
+            this.btnload.TabIndex = 75;
+            this.btnload.Text = "Load";
+            this.btnload.UseVisualStyleBackColor = true;
+            this.btnload.Click += new System.EventHandler(this.btnload_Click);
+            // 
             // Form7
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnload);
             this.Controls.Add(this.txtid);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtname);
@@ -155,5 +167,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnback;
         private System.Windows.Forms.TextBox txtid;
+        private System.Windows.Forms.Button btnload;
     }
 }
